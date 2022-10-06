@@ -1,5 +1,5 @@
 import express from 'express';
-import * as actorModel from '../models/actor.model.js'
+import actorModel from '../models/actor.model.js'
 
 const router = express.Router();
 
