@@ -1,11 +1,9 @@
-var swaggerDefinition = {
+const swaggerDefinition = {
+  openapi: '3.0.0',
   info: {
-    title: 'Node Swagger API',
+    title: 'Express API for JSONPlaceholder',
     version: '1.0.0',
-    description: 'Demonstrating how to describe a RESTful API with Swagger',
   },
-  host: 'localhost:3000',
-  basePath: '/',
 };
 
 export default {
