@@ -1,0 +1,150 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "version": "1.0.0",
+    "title": "API Documentation in Node.js Using Swagger",
+    "description": "User Restful webservice application",
+    "license": {
+      "name": "Group 14"
+    },
+    "server": {
+      "url": "http://localhost:3000",
+      "description": "local server"
+    }
+  },
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "Films",
+      "description": "API for films"
+    }
+  ],
+  "produces": ["application/json"],
+  "paths": {
+    "/api/films": {
+      "get": {
+        "tags": ["Films"],
+        "summary": "Get all films",
+        "responses": {
+          "200": {
+            "description": "Return list object film",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/Films"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Films"],
+        "summary": "add a new film",
+        "requestBody":
+        {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/Films"
+              }
+            }
+          }
+          
+        },
+        "responses": {
+          "200": {
+            "description": "object film"
+          },
+          "400": {
+            "description": "Error"
+          }
+        }
+      }
+    },
+    "/api/films/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "Id of the film which is to be searched",
+          "type": "integer"
+        }
+      ],
+      "produces": ["application/json"],
+      "get": {
+        "tags": ["Films"],
+        "summary": "Get film by id",
+        "responses": {
+          "200": {
+            "description": "return object film"
+          },
+          "404": {
+            "description": "not found"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Films"],
+        "summary": "Delete film by id",
+        "responses": {
+          "200": {
+            "description": "return affected"
+          },
+          "404": {
+            "description": "Error"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Film": {
+      "required": ["title", "language_id"],
+      "properties": {
+        "film_id": {
+          "type": "integer",
+          "uniqueItems": true
+        },
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "release_year": {
+          "type": "integer"
+        },
+        "language_id": {
+          "type": "integer"
+        },
+        "original_language_id": {
+          "type": "integer"
+        },
+        "rental_duration": {
+          "type": "integer"
+        },
+        "rental_rate": {
+          "type": "number"
+        },
+        "replacement_cost": {
+          "type": "number"
+        },
+        "rating": {
+          "type": "string"
+        },
+        "special_features": {
+          "type": "string"
+        },
+        "last_update": {
+          "type": "string"
+        }
+      }
+    },
+    "Films": {
+      "type": "array",
+      "$ref": "#/definitions/Film"
+    }
+  }
+}
