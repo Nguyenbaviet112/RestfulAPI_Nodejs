@@ -1,5 +1,6 @@
 import filmModel from '../models/film.model.js'
 import validate from '../middle_wares/validate.mdw.js';
+import logging from '../middle_wares/logging.js';
 import {readFile} from 'fs/promises'
 import express from 'express';
 
@@ -8,7 +9,7 @@ const router = express.Router();
 const schema = JSON.parse(await readFile(new URL('../schemas/film.json', import.meta.url)));
 
 
-router.get('/', async function (req, res)
+router.get('/', logging, async function (req, res)
 {
     const list = await filmModel.findAll();
     res.json(list);
@@ -16,7 +17,7 @@ router.get('/', async function (req, res)
 });
 
 
-router.get('/:id', async function (req, res)
+router.get('/:id', logging, async function (req, res)
 {
     const id = req.params.id || 0;
     const film = await filmModel.findById(id);
@@ -32,7 +33,7 @@ router.get('/:id', async function (req, res)
 
 
 
-router.post('/', validate(schema), async function (req, res)
+router.post('/', logging, validate(schema), async function (req, res)
 {
     let film = req.body;
 
@@ -49,7 +50,7 @@ router.post('/', validate(schema), async function (req, res)
 
 
 
-router.delete('/:id', async function(req, res)
+router.delete('/:id', logging, async function(req, res)
 {
     const id = req.params.id || 0;
 
