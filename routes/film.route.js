@@ -1,15 +1,16 @@
 import filmModel from '../models/film.model.js'
 import validate from '../middle_wares/validate.mdw.js';
-import logging from '../middle_wares/logging.js';
+import logging from '../middle_wares/logging.mdw.js';
 import {readFile} from 'fs/promises'
 import express from 'express';
+import secret from '../middle_wares/secret.mdw.js';
 
 
 const router = express.Router();
 const schema = JSON.parse(await readFile(new URL('../schemas/film.json', import.meta.url)));
 
 
-router.get('/', logging, async function (req, res)
+router.get('/', logging, secret, async function (req, res)
 {
     const list = await filmModel.findAll();
     res.json(list);
@@ -53,8 +54,6 @@ router.post('/', logging, validate(schema), async function (req, res)
 router.delete('/:id', logging, async function(req, res)
 {
     const id = req.params.id || 0;
-
-    console.log(id);
 
     const n = await filmModel.del(id);
     res.json(

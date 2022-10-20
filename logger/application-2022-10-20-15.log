@@ -1,0 +1,6 @@
+{
+  level: 'info',
+  message: 'method: GET, path: localhost:3000/api/films, url: /, statusCode: 400, response: {"message":"Invalid token"}, requestBody: {}',
+  label: 'winston custom format',
+  timestamp: 'Oct-20-2022 15:24:34'
+}

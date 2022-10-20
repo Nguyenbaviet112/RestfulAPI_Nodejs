@@ -9,9 +9,7 @@ const logging = function (req, res, next) {
     var res_status = 0;
   
     var oldSend = res.send;
-  
-    console.log(JSON.stringify(req.body) + '')
-  
+    
     res.send = function(data)
     {
   
@@ -20,15 +18,15 @@ const logging = function (req, res, next) {
       logger.log(
         "info",
         "method: " +
-          `${req.method}` +
-          " url: " +
-          `${req.url}` +
+          `${req.method}` + ',' +
           " path: " +
-          path +
-          " statusCode: " +
-          res_status +
+          path + ',' +
+          " url: " +
+          `${req.url}` + ',' +
+          " statusCode: " + 
+          res_status + ',' +
           " response: " +
-          data +
+          data + ',' +
           " requestBody: " +
           JSON.stringify(req.body)
           

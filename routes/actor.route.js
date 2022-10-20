@@ -1,10 +1,12 @@
 import express from 'express';
-import actorModel from '../models/actor.model.js'
+import actorModel from '../models/actor.model.js';
+import logging from '../middle_wares/logging.mdw.js';
+import basic_authentication from '../middle_wares/authentication.mdw.js';
 
 const router = express.Router();
 
 
-router.get('/', async function (req, res)
+router.get('/', logging, basic_authentication, async function (req, res)
 {
     const list = await actorModel.findAll();
     res.json(list);
@@ -12,7 +14,7 @@ router.get('/', async function (req, res)
 
 });
 
-router.get('/:id', async function (req, res)
+router.get('/:id', logging, async function (req, res)
 {
     const id = req.params.id || 0;
     const actor = await actorModel.findById(id);
@@ -27,7 +29,7 @@ router.get('/:id', async function (req, res)
 });
 
 
-router.post('/', async function (req, res)
+router.post('/', logging, async function (req, res)
 {
     let actor = req.body;
 
@@ -43,7 +45,7 @@ router.post('/', async function (req, res)
 });
 
 
-router.delete('/:id', async function(req, res)
+router.delete('/:id', logging, async function(req, res)
 {
     const id = req.params.id || 0;
 
