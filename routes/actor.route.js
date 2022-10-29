@@ -6,7 +6,7 @@ import basic_authentication from '../middle_wares/authentication.mdw.js';
 const router = express.Router();
 
 
-router.get('/', logging, basic_authentication, async function (req, res)
+router.get('/', basic_authentication, logging, async function (req, res)
 {
     const list = await actorModel.findAll();
     res.json(list);

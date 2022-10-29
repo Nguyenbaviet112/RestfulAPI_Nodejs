@@ -23,5 +23,10 @@ export default function (table_name, id_field) {
     del(id) {
       return db(table_name).where(id_field, id).del();
     },
+
+    patch(id, entity) {
+      return db(table_name).where(id_field, id).update(entity);
+    },
+
   };
 }

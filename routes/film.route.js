@@ -10,7 +10,7 @@ const router = express.Router();
 const schema = JSON.parse(await readFile(new URL('../schemas/film.json', import.meta.url)));
 
 
-router.get('/', logging, secret, async function (req, res)
+router.get('/', secret, logging, async function (req, res)
 {
     const list = await filmModel.findAll();
     res.json(list);
